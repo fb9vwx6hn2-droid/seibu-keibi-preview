@@ -1,180 +1,108 @@
-const header = document.getElementById("siteHeader");
-const menuButton = document.getElementById("menuButton");
-const globalNav = document.getElementById("globalNav");
-const heroVideo = document.getElementById("heroVideo");
-const videoStatus = document.getElementById("videoStatus");
-const contactForm = document.getElementById("contactForm");
-const formResult = document.getElementById("formResult");
-const contactStatus = document.getElementById("contactStatus");
-const serviceMenuDialog = document.getElementById("serviceMenuDialog");
-const serviceMenuTitle = document.getElementById("serviceMenuTitle");
-const serviceMenuImage = document.getElementById("serviceMenuImage");
-const serviceMenuImageWrap = document.getElementById("serviceMenuImageWrap");
-const serviceMenuClose = document.getElementById("serviceMenuClose");
+(() => {
+  "use strict";
+  const header = document.querySelector(".site-header");
+  const button = document.getElementById("menuButton");
+  const nav = document.getElementById("globalNav");
+  const label = document.getElementById("menuLabel");
+  const mobile = window.matchMedia("(max-width: 1100px)");
 
-const updateHeader = () => {
-  header?.classList.toggle("is-scrolled", window.scrollY > 24);
-};
-
-const closeMenu = () => {
-  menuButton?.classList.remove("is-open");
-  globalNav?.classList.remove("is-open");
-  document.body.classList.remove("menu-open");
-  menuButton?.setAttribute("aria-expanded", "false");
-  menuButton?.setAttribute("aria-label", "メニューを開く");
-};
-
-menuButton?.addEventListener("click", () => {
-  const willOpen = !globalNav?.classList.contains("is-open");
-  menuButton.classList.toggle("is-open", willOpen);
-  globalNav?.classList.toggle("is-open", willOpen);
-  document.body.classList.toggle("menu-open", willOpen);
-  menuButton.setAttribute("aria-expanded", String(willOpen));
-  menuButton.setAttribute("aria-label", willOpen ? "メニューを閉じる" : "メニューを開く");
-});
-
-globalNav?.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", closeMenu);
-});
-
-window.addEventListener("scroll", updateHeader, { passive: true });
-window.addEventListener("resize", () => {
-  if (window.innerWidth > 900) closeMenu();
-});
-updateHeader();
-
-if (heroVideo) {
-  const markVideoReady = () => {
-    heroVideo.classList.add("is-ready");
-    videoStatus?.classList.add("video-loaded");
-    if (videoStatus) {
-      videoStatus.lastChild.textContent = " 16:9 VIDEO / PLAYING";
-    }
+  // Keep anchors and the final content clear of fixed controls, including text zoom.
+  const actions = document.querySelector(".mobile-actions");
+  const updateOffsets = () => {
+    const root = document.documentElement;
+    root.style.setProperty(
+      "--header-offset",
+      `${header?.getBoundingClientRect().height || 0}px`,
+    );
+    root.style.setProperty(
+      "--actions-offset",
+      `${actions?.getBoundingClientRect().height || 0}px`,
+    );
   };
-
-  heroVideo.addEventListener("canplay", markVideoReady, { once: true });
-  heroVideo.addEventListener("error", () => {
-    heroVideo.classList.remove("is-ready");
-  });
-
-  if (heroVideo.readyState >= 3) markVideoReady();
-}
-
-const closeServiceMenu = () => {
-  if (!serviceMenuDialog) return;
-  if (typeof serviceMenuDialog.close === "function") {
-    serviceMenuDialog.close();
-  } else {
-    serviceMenuDialog.removeAttribute("open");
+  document.documentElement.dataset.enhanced = "true";
+  if ("ResizeObserver" in window) {
+    const observer = new ResizeObserver(updateOffsets);
+    if (header) observer.observe(header);
+    if (actions) observer.observe(actions);
   }
-};
+  window.addEventListener("resize", updateOffsets, { passive: true });
 
-document.querySelectorAll(".service-menu-trigger").forEach((trigger) => {
-  trigger.addEventListener("click", () => {
-    if (!serviceMenuDialog || !serviceMenuImage || !serviceMenuTitle) return;
-
-    const title = trigger.dataset.menuTitle ?? "サービス";
-    const imagePath = trigger.dataset.menuImage;
-    if (!imagePath) return;
-
-    serviceMenuTitle.textContent = title;
-    serviceMenuImage.src = imagePath;
-    serviceMenuImage.alt = `${title}の料金と作業内容をまとめたメニュー表`;
-    serviceMenuImage.classList.remove("is-zoomed");
-    if (serviceMenuImageWrap) {
-      serviceMenuImageWrap.scrollTop = 0;
-      serviceMenuImageWrap.scrollLeft = 0;
-    }
-
-    document.body.classList.add("service-menu-open");
-    if (typeof serviceMenuDialog.showModal === "function") {
-      serviceMenuDialog.showModal();
-    } else {
-      serviceMenuDialog.setAttribute("open", "");
-    }
-  });
-});
-
-serviceMenuClose?.addEventListener("click", closeServiceMenu);
-
-serviceMenuDialog?.addEventListener("click", (event) => {
-  if (event.target === serviceMenuDialog) closeServiceMenu();
-});
-
-serviceMenuDialog?.addEventListener("close", () => {
-  document.body.classList.remove("service-menu-open");
-});
-
-serviceMenuDialog?.addEventListener("cancel", () => {
-  document.body.classList.remove("service-menu-open");
-});
-
-serviceMenuImage?.addEventListener("click", () => {
-  serviceMenuImage.classList.toggle("is-zoomed");
-  if (!serviceMenuImage.classList.contains("is-zoomed") && serviceMenuImageWrap) {
-    serviceMenuImageWrap.scrollLeft = 0;
+  // A disclosure menu: links remain available when JavaScript is unavailable.
+  if (header && button && nav) {
+    const setMenu = (open, restoreFocus = false) => {
+      nav.hidden = mobile.matches && !open;
+      button.setAttribute("aria-expanded", String(mobile.matches && open));
+      if (label) label.textContent = open ? "閉じる" : "メニュー";
+      if (restoreFocus) button.focus();
+    };
+    const sync = () => {
+      // If resizing hides a currently focused navigation link, return to the trigger.
+      const restore = mobile.matches && nav.contains(document.activeElement);
+      button.hidden = !mobile.matches;
+      setMenu(false, restore);
+    };
+    header.dataset.enhanced = "true";
+    sync();
+    mobile.addEventListener("change", sync);
+    button.addEventListener("click", () =>
+      setMenu(button.getAttribute("aria-expanded") !== "true"),
+    );
+    nav.addEventListener("click", (event) => {
+      const link = event.target.closest("a");
+      if (!link || !mobile.matches) return;
+      setMenu(false);
+      // For in-page navigation, place keyboard focus at the destination as well.
+      const url = new URL(link.href);
+      if (url.pathname === location.pathname && url.hash) {
+        const destination = document.getElementById(
+          decodeURIComponent(url.hash.slice(1)),
+        );
+        if (destination) {
+          destination.setAttribute("tabindex", "-1");
+          destination.focus({ preventScroll: true });
+        }
+      }
+    });
+    document.addEventListener("keydown", (event) => {
+      if (
+        event.key === "Escape" &&
+        button.getAttribute("aria-expanded") === "true"
+      ) {
+        setMenu(false, true);
+      }
+    });
+    document.addEventListener("click", (event) => {
+      if (!header.contains(event.target)) setMenu(false);
+    });
+    header.addEventListener("focusout", (event) => {
+      if (event.relatedTarget && !header.contains(event.relatedTarget))
+        setMenu(false);
+    });
   }
-});
+  updateOffsets();
 
-const revealItems = document.querySelectorAll(".reveal");
-
-if ("IntersectionObserver" in window) {
-  const revealObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.12, rootMargin: "0px 0px -40px" },
-  );
-
-  revealItems.forEach((item) => revealObserver.observe(item));
-} else {
-  revealItems.forEach((item) => item.classList.add("is-visible"));
-}
-
-contactForm?.addEventListener("submit", (event) => {
-  event.preventDefault();
-  if (!contactForm.checkValidity()) {
-    contactForm.reportValidity();
-    return;
-  }
-
-  if (formResult) {
-    formResult.textContent =
-      "入力内容を確認しました。現在は叩き台のため、実際の送信は行われません。";
-  }
-});
-
-const contactLinks = window.SEIBU_CONTACTS ?? {};
-const contactLabels = {
-  line: "LINE公式アカウント",
-  instagram: "Instagramアカウント",
-  googleForm: "Googleフォーム",
-};
-
-document.querySelectorAll("[data-contact-link]").forEach((link) => {
-  const type = link.dataset.contactLink;
-  const configuredValue = contactLinks[type]?.trim();
-
-  if (configuredValue) {
-    link.href = configuredValue;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    return;
-  }
-
-  link.classList.add("is-pending");
-  link.setAttribute("aria-disabled", "true");
-  link.addEventListener("click", (event) => {
-    event.preventDefault();
-    if (contactStatus) {
-      contactStatus.textContent = `${contactLabels[type]}は、正式な情報をいただいた後に接続します。`;
+  // Only expose connected HTTPS destinations; no inactive or '#' contact links.
+  const contacts = window.SEIBU_CONTACTS || {};
+  let available = 0;
+  document.querySelectorAll("[data-contact-link]").forEach((link) => {
+    const value = contacts[link.dataset.contactLink];
+    if (typeof value !== "string" || !value.trim()) return;
+    try {
+      const url = new URL(value.trim());
+      if (url.protocol !== "https:" || url.username || url.password) return;
+      link.href = url.href;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.hidden = false;
+      available += 1;
+    } catch {
+      /* Leave unconfigured destinations hidden. */
     }
   });
-});
-
-const currentYear = document.getElementById("currentYear");
-if (currentYear) currentYear.textContent = String(new Date().getFullYear());
+  const panel = document.getElementById("onlineContacts");
+  const note = document.getElementById("onlineNote");
+  if (panel) panel.hidden = available === 0;
+  if (note) note.hidden = available > 0;
+  const year = document.getElementById("currentYear");
+  if (year) year.textContent = String(new Date().getFullYear());
+})();
