@@ -33,9 +33,15 @@
       property="og:url"
       content="https://fb9vwx6hn2-droid.github.io/seibu-keibi-preview/"
     />
-    <link rel="stylesheet" href="style.css?v=20260906" />
+    <link
+      rel="preload"
+      as="image"
+      href="assets/hero-mountains.jpg"
+      fetchpriority="high"
+    />
+    <link rel="stylesheet" href="style.css?v=20260915" />
     <script src="contact-links.js?v=20260906" defer></script>
-    <script src="script.js?v=20260906" defer></script>
+    <script src="script.js?v=20260915" defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -121,43 +127,22 @@
             </div>
             <p class="hero-hours">電話受付 7:00–19:00 ／ 0538-44-3348</p>
           </div>
-          <aside class="hero-aside" aria-label="セイブ警備について">
-            <p class="aside-label">SEIBU SECURITY</p>
-            <div class="aside-main">
-              <span aria-hidden="true">01 / SECURITY</span>
-              <p>人と車の流れに、<br />確かな安心を。</p>
-            </div>
-            <dl>
-              <div>
-                <dt>主な警備</dt>
-                <dd>交通誘導警備</dd>
-              </div>
-              <div>
-                <dt>拠点</dt>
-                <dd>静岡県袋井市</dd>
-              </div>
-              <div>
-                <dt>対応地域</dt>
-                <dd>静岡県西部</dd>
-              </div>
-            </dl>
-          </aside>
         </div>
       </section>
       <nav class="purpose-nav container" aria-label="目的から探す">
-        <a href="#security"
+        <a class="purpose-security" href="#security"
           ><span>工事・建設関係の方</span><strong>警備を依頼したい</strong
           ><b aria-hidden="true">↓</b></a
-        ><a href="#support"
+        ><a class="purpose-support" href="#support"
           ><span>暮らし・建物のお困りごと</span
           ><strong>サービスと料金を知りたい</strong
           ><b aria-hidden="true">↓</b></a
-        ><a href="#recruit"
+        ><a class="purpose-recruit" href="#recruit"
           ><span>お仕事をお探しの方</span><strong>採用情報を見たい</strong
           ><b aria-hidden="true">↓</b></a
         >
       </nav>
-      <section class="section intro" id="intro">
+      <section class="section intro spotlight-section" id="intro">
         <div class="container two-columns">
           <div class="section-heading">
             <p class="eyebrow">私たちの使命</p>
@@ -172,7 +157,7 @@
         </div>
       </section>
       <section
-        class="section security"
+        class="section security spotlight-section"
         id="security"
         aria-labelledby="securityTitle"
       >
@@ -220,7 +205,7 @@
         </div>
       </section>
       <section
-        class="section support"
+        class="section support spotlight-section"
         id="support"
         aria-labelledby="supportTitle"
       >
@@ -414,7 +399,7 @@
         </div>
       </section>
       <section
-        class="section company"
+        class="section company spotlight-section"
         id="company"
         aria-labelledby="companyTitle"
       >
@@ -461,7 +446,7 @@
         </div>
       </section>
       <section
-        class="section recruit"
+        class="section recruit spotlight-section"
         id="recruit"
         aria-labelledby="recruitTitle"
       >
@@ -491,7 +476,7 @@
         </div>
       </section>
       <section
-        class="section contact"
+        class="section contact spotlight-section"
         id="contact"
         aria-labelledby="contactTitle"
       >

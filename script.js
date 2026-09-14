@@ -81,6 +81,53 @@
   }
   updateOffsets();
 
+  // Emphasise the section nearest the reading position while softly fading
+  // only neighbouring sections that are also visible in the viewport.
+  const focusSections = Array.from(
+    document.querySelectorAll(".spotlight-section"),
+  );
+  if (focusSections.length) {
+    let focusFrame = 0;
+
+    const applySectionFocus = (activeSection) => {
+      const headerBottom = header?.getBoundingClientRect().bottom || 0;
+      focusSections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        const visible = rect.bottom > headerBottom && rect.top < innerHeight;
+        section.classList.toggle("is-focus", section === activeSection);
+        section.classList.toggle(
+          "is-dimmed",
+          Boolean(activeSection && section !== activeSection && visible),
+        );
+      });
+    };
+
+    const updateSectionFocus = () => {
+      focusFrame = 0;
+      const headerBottom = header?.getBoundingClientRect().bottom || 0;
+      const focusLine = headerBottom + (innerHeight - headerBottom) * 0.46;
+      const activeSection = focusSections.find((section) => {
+        const rect = section.getBoundingClientRect();
+        return rect.top <= focusLine && rect.bottom >= focusLine;
+      });
+      applySectionFocus(activeSection || null);
+    };
+
+    const scheduleSectionFocus = () => {
+      if (focusFrame) return;
+      focusFrame = requestAnimationFrame(updateSectionFocus);
+    };
+
+    document.documentElement.classList.add("spotlight-ready");
+    window.addEventListener("scroll", scheduleSectionFocus, { passive: true });
+    window.addEventListener("resize", scheduleSectionFocus, { passive: true });
+    document.addEventListener("focusin", (event) => {
+      const section = event.target.closest?.(".spotlight-section");
+      if (section) applySectionFocus(section);
+    });
+    scheduleSectionFocus();
+  }
+
   // Only expose connected HTTPS destinations; no inactive or '#' contact links.
   const contacts = window.SEIBU_CONTACTS || {};
   let available = 0;
