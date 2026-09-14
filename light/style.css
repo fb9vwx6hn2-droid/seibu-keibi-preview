@@ -1681,6 +1681,10 @@ main {
   color: #31675d;
 }
 
+.support .section-heading h2 {
+  font-size: clamp(1.75rem, 3vw, 2.35rem);
+}
+
 .support .notice,
 .support .cost-note {
   border-left-color: var(--support);
