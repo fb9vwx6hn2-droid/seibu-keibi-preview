@@ -1562,7 +1562,7 @@ main {
       rgba(9, 25, 35, 0.62) 68%,
       rgba(9, 25, 35, 0.4) 100%
     ),
-    url("assets/anime-security-guard-hero.png");
+    url("../assets/anime-security-guard-hero.png");
   background-position: center;
   background-size: cover;
 }
@@ -1868,7 +1868,7 @@ main {
         rgba(9, 25, 35, 0.82) 72%,
         rgba(9, 25, 35, 0.66) 100%
       ),
-      url("assets/anime-security-guard-hero.png");
+      url("../assets/anime-security-guard-hero.png");
     background-position: 64% center;
   }
 
