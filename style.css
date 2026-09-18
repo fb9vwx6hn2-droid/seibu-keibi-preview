@@ -756,8 +756,7 @@ main:focus {
 .instagram-card img {
   width: 118px;
   aspect-ratio: 1 / 1;
-  object-fit: cover;
-  object-position: center;
+  object-fit: contain;
 }
 .instagram-card > span {
   display: flex;
