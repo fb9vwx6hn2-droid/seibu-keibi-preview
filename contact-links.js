@@ -1,5 +1,5 @@
 window.SEIBU_CONTACTS = {
   line: "",
-  instagram: "",
+  instagram: "https://www.instagram.com/seibukrk/",
   googleForm: "",
 };

@@ -39,8 +39,8 @@
       href="assets/hero-mountains.jpg"
       fetchpriority="high"
     />
-    <link rel="stylesheet" href="style.css?v=20260915" />
-    <script src="contact-links.js?v=20260906" defer></script>
+    <link rel="stylesheet" href="style.css?v=20260918b" />
+    <script src="contact-links.js?v=20260918" defer></script>
     <script src="script.js?v=20260915" defer></script>
     <script type="application/ld+json">
       {
@@ -53,6 +53,7 @@
             "url": "https://fb9vwx6hn2-droid.github.io/seibu-keibi-preview/",
             "telephone": "+81-538-44-3348",
             "faxNumber": "+81-538-44-3391",
+            "sameAs": ["https://www.instagram.com/seibukrk/"],
             "address": {
               "@type": "PostalAddress",
               "addressRegion": "静岡県",
@@ -82,8 +83,13 @@
     <header class="site-header">
       <div class="header-inner">
         <a class="brand" href="#top" aria-label="セイブ警備 ホーム"
-          ><span class="brand-mark" aria-hidden="true"><span></span></span
-          ><span>セイブ警備</span></a
+          ><img
+            class="brand-logo"
+            src="assets/seibu-logo.png"
+            alt=""
+            width="1448"
+            height="1086"
+          /><span>セイブ警備</span></a
         >
         <button
           class="menu-button"
@@ -442,7 +448,56 @@
               <dt>対応エリア</dt>
               <dd>袋井市を中心とした静岡県西部</dd>
             </div>
+            <div>
+              <dt>認定番号</dt>
+              <dd>
+                静岡県公安委員会 第49000657号<br /><a
+                  href="#security-license"
+                  >警備業者標識を見る</a
+                >
+              </dd>
+            </div>
           </dl>
+        </div>
+      </section>
+      <section
+        class="section security-license spotlight-section"
+        id="security-license"
+        aria-labelledby="securityLicenseTitle"
+      >
+        <div class="container two-columns security-license-grid">
+          <div class="section-heading">
+            <p class="eyebrow">警備業者標識</p>
+            <h2 id="securityLicenseTitle">安心の根拠を、<br />見えるかたちに。</h2>
+            <p>
+              警備業法に基づく標識を掲載しています。認定番号、有効期限、所在地などをご確認いただけます。
+            </p>
+            <a
+              class="button button-dark"
+              href="documents/security-business-sign.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              >警備業者標識をPDFで開く
+              <span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <figure class="license-preview">
+            <a
+              href="documents/security-business-sign.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="警備業者標識をPDFで開く"
+            >
+              <img
+                src="assets/security-business-sign.png"
+                alt="静岡県公安委員会認定 第49000657号の警備業者標識"
+                width="1404"
+                height="992"
+                loading="lazy"
+              />
+            </a>
+            <figcaption>静岡県公安委員会認定　第49000657号</figcaption>
+          </figure>
         </div>
       </section>
       <section
@@ -524,6 +579,23 @@
                     ></a
                   >
                 </div>
+                <a
+                  class="instagram-card"
+                  data-contact-link="instagram"
+                  hidden
+                >
+                  <img
+                    src="assets/instagram-qr.jpg"
+                    alt="セイブ警備 Instagram @SEIBUKRK のQRコード"
+                    width="1080"
+                    height="1397"
+                    loading="lazy"
+                  />
+                  <span
+                    ><strong>Instagram</strong><small>@SEIBUKRK</small
+                    ><em>アカウントを開く ↗</em></span
+                  >
+                </a>
               </div>
               <p class="online-note" id="onlineNote">
                 オンライン窓口は準備中です。現在はお電話でご相談ください。
@@ -537,8 +609,13 @@
       <div class="container footer-top">
         <div>
           <a class="brand" href="#top" aria-label="セイブ警備 ホーム"
-            ><span class="brand-mark" aria-hidden="true"><span></span></span
-            ><span>セイブ警備</span></a
+            ><img
+              class="brand-logo"
+              src="assets/seibu-logo.png"
+              alt=""
+              width="1448"
+              height="1086"
+            /><span>セイブ警備</span></a
           >
           <p>静岡県袋井市堀越1-18-16</p>
           <p>
@@ -549,6 +626,7 @@
           <a href="#security">警備事業</a
           ><a href="#support">暮らし・建物サポート</a
           ><a href="#company">会社案内</a><a href="#recruit">採用情報</a
+          ><a href="#security-license">警備業者標識</a
           ><a href="#contact">お問い合わせ</a>
         </nav>
       </div>
