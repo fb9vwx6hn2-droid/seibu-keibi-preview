@@ -371,11 +371,6 @@ main:focus {
   gap: 12px;
   margin-top: 32px;
 }
-.hero-hours {
-  font-size: 0.875rem;
-  color: #bbc8d0;
-  margin-top: 18px;
-}
 .hero-aside {
   align-self: stretch;
   padding: 6px 0 0 28px;
@@ -700,6 +695,23 @@ main:focus {
   font-size: 0.875rem;
   color: #d6e1e7;
 }
+.phone-details {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid #526570;
+}
+.phone-details h3 {
+  font-size: 1.125rem;
+}
+.phone-details ul {
+  padding-left: 1.25em;
+  margin: 18px 0 10px;
+  color: #e0e7eb;
+}
+.phone-details p {
+  color: #d6e1e7;
+  font-size: 0.875rem;
+}
 .contact-guide {
   padding-left: 36px;
   border-left: 1px solid #526570;
@@ -738,46 +750,20 @@ main:focus {
   color: var(--navy);
   font-weight: 700;
 }
-.instagram-card {
-  display: grid;
-  grid-template-columns: 118px 1fr;
-  align-items: center;
-  gap: 22px;
+.instagram-icon-link {
+  display: inline-block;
+  width: 76px;
+  height: 76px;
   margin-top: 18px;
-  padding: 14px;
-  border: 1px solid #71828d;
-  background: #fff;
-  color: var(--navy);
 }
-.instagram-card:hover {
+.instagram-icon-link:hover {
   text-decoration: none;
-  border-color: var(--gold);
+  transform: translateY(-2px);
 }
-.instagram-card img {
-  width: 118px;
-  aspect-ratio: 1 / 1;
+.instagram-icon-link img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-}
-.instagram-card > span {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.instagram-card strong {
-  font-size: 1.1rem;
-}
-.instagram-card small {
-  font-family: Arial, sans-serif;
-  font-size: 0.9375rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-.instagram-card em {
-  margin-top: 8px;
-  color: var(--gold-ink);
-  font-size: 0.8125rem;
-  font-style: normal;
-  font-weight: 700;
 }
 .site-footer {
   background: var(--navy-deep);
@@ -1050,6 +1036,58 @@ main:focus {
 }
 .price-table-fees th:nth-child(3) {
   width: 40%;
+}
+.price-example {
+  margin-top: 32px;
+  padding: 30px 32px;
+  border: 1px solid #c4a34d;
+  background: #fffdf7;
+}
+.price-example-label {
+  color: var(--gold-ink);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.price-example h3 {
+  margin-top: 6px;
+  font-size: 1.35rem;
+}
+.price-example-condition {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.price-example dl {
+  margin-top: 22px;
+}
+.price-example dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 13px 0;
+  border-top: 1px solid var(--line);
+}
+.price-example dt {
+  font-weight: 700;
+}
+.price-example dd {
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--gold-ink);
+}
+.price-example-total {
+  border-top: 2px solid var(--navy) !important;
+}
+.price-example-total dt,
+.price-example-total dd {
+  color: var(--navy);
+  font-size: 1.08rem;
+}
+.price-example-note {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 0.8125rem;
 }
 .flow-list {
   display: grid;
@@ -1340,9 +1378,6 @@ main:focus {
     width: 100%;
     padding: 14px 20px;
   }
-  .hero-hours {
-    font-size: 0.875rem;
-  }
   .purpose-nav {
     grid-template-columns: 1fr;
     padding: 8px 0;
@@ -1431,12 +1466,9 @@ main:focus {
     border-left: 0;
     border-top: 1px solid #526570;
   }
-  .instagram-card {
-    grid-template-columns: 92px 1fr;
-    gap: 16px;
-  }
-  .instagram-card img {
-    width: 92px;
+  .instagram-icon-link {
+    width: 72px;
+    height: 72px;
   }
   .phone-link {
     font-size: clamp(1.7rem, 7.8vw, 2.4rem);
@@ -1599,6 +1631,15 @@ main:focus {
   }
   .price-table td strong {
     font-size: 0.9rem;
+  }
+  .price-example {
+    padding: 22px 18px;
+  }
+  .price-example dl > div {
+    align-items: flex-start;
+  }
+  .price-example dd {
+    text-align: right;
   }
   .online-note {
     font-size: 0.875rem;

@@ -33,7 +33,7 @@
       property="og:url"
       content="https://fb9vwx6hn2-droid.github.io/seibu-keibi-preview/hoarding-cleanup.html"
     />
-    <link rel="stylesheet" href="style.css?v=20260918c" />
+    <link rel="stylesheet" href="style.css?v=20260918d" />
     <script src="contact-links.js?v=20260918" defer></script>
     <script src="script.js?v=20260906" defer></script>
     <script type="application/ld+json">
@@ -130,7 +130,7 @@
           ><a href="./#contact">お問い合わせ</a>
         </nav>
         <a class="header-phone" href="tel:0538443348"
-          ><span>電話受付 7:00–19:00</span><strong>0538-44-3348</strong></a
+          ><span>警備のご相談 7:00–19:00</span><strong>0538-44-3348</strong></a
         >
       </div>
     </header>
@@ -153,8 +153,8 @@
           <div class="hero-actions">
             <a class="button button-dark" href="#plans"
               >料金を見る <span aria-hidden="true">↓</span></a
-            ><a class="text-link" href="tel:0538443348"
-              >電話で相談する <span aria-hidden="true">↗</span></a
+            ><a class="text-link" href="#contact"
+              >オンラインで相談する <span aria-hidden="true">↓</span></a
             >
           </div>
         </div>
@@ -230,16 +230,21 @@
           <p class="cost-note">
             廃棄物の収集運搬・処分は袋井市の許可業者が行います。処分費の表は一般的な参考価格であり、ごみの種類・重量・量、搬出状況、許可業者の料金により変動します。家電リサイクル品、金庫、ピアノなどは別途費用がかかる場合があります。正式金額は現地確認後にご案内します。
           </p>
-          <a
-            class="text-link original-menu"
-            href="assets/menu-hoarding-cleanup.png?v=20260918"
-            target="_blank"
-            rel="noopener noreferrer"
-            >料金表を画像で開く<span class="sr-only"
-              >（新しいタブで開きます）</span
-            >
-            <span aria-hidden="true">↗</span></a
-          >
+          <aside class="price-example" aria-labelledby="hoardingExampleTitle">
+            <p class="price-example-label">料金例</p>
+            <h3 id="hoardingExampleTitle">1K・ごみ約1㎥の場合</h3>
+            <p class="price-example-condition">
+              搬出条件が通常で、家電リサイクル品・重量物を含まない場合
+            </p>
+            <dl>
+              <div><dt>片付け・整理の作業料金</dt><dd>5～10万円</dd></div>
+              <div><dt>許可業者の収集運搬・処分費</dt><dd>2～3万円</dd></div>
+              <div class="price-example-total"><dt>合計目安（税込）</dt><dd>7～13万円</dd></div>
+            </dl>
+            <p class="price-example-note">
+              実際の料金は家財量、ごみの種類・重量、階段や搬出距離などにより変わります。
+            </p>
+          </aside>
         </div>
       </section>
       <section class="section flow" aria-labelledby="flowTitle">
@@ -252,7 +257,7 @@
             <li>
               <span aria-hidden="true">01</span>
               <h3>ご相談</h3>
-              <p>お電話で、場所・状況・ご希望をお聞かせください。</p>
+              <p>オンライン窓口から、場所・状況・ご希望をお聞かせください。</p>
             </li>
             <li>
               <span aria-hidden="true">02</span>
@@ -289,7 +294,7 @@
           </div>
           <div class="contact-grid">
             <div class="contact-phone">
-              <p>お電話でのご相談</p>
+              <p>警備・採用のお電話</p>
               <a href="tel:0538443348" class="phone-link"
                 >0538-44-3348 <span aria-hidden="true">↗</span></a
               >
@@ -297,24 +302,22 @@
               <p class="emergency">
                 緊急のご用件は、受付時間外でもお電話ください。
               </p>
+              <div class="phone-details">
+                <h3>お電話でお伝えいただきたいこと</h3>
+                <ul>
+                  <li>ご相談内容・ご希望のサービス</li>
+                  <li>現場や建物の場所</li>
+                  <li>ご希望の日程・現在の状況</li>
+                </ul>
+                <p>分かる範囲で構いません。</p>
+              </div>
             </div>
             <div class="contact-guide">
-              <h3>お電話でお伝えいただきたいこと</h3>
-              <ul>
-                <li>ご相談内容・ご希望のサービス</li>
-                <li>現場や建物の場所</li>
-                <li>ご希望の日程・現在の状況</li>
-              </ul>
-              <p>分かる範囲で構いません。</p>
+              <h3>暮らし・建物サポート</h3>
               <div class="online-contacts" id="onlineContacts" hidden>
-                <p>暮らし・建物サポートのオンライン相談</p>
                 <div class="channel-links">
                   <a data-contact-link="line" hidden
                     >LINEで相談<span class="sr-only"
-                      >（新しいタブで開きます）</span
-                    ></a
-                  ><a data-contact-link="instagram" hidden
-                    >Instagramで相談<span class="sr-only"
                       >（新しいタブで開きます）</span
                     ></a
                   ><a data-contact-link="googleForm" hidden
@@ -324,8 +327,9 @@
                   >
                 </div>
                 <a
-                  class="instagram-card"
+                  class="instagram-icon-link"
                   data-contact-link="instagram"
+                  aria-label="Instagram @SEIBUKRKを開く"
                   hidden
                 >
                   <img
@@ -335,10 +339,6 @@
                     height="256"
                     loading="lazy"
                   />
-                  <span
-                    ><strong>Instagram</strong><small>@SEIBUKRK</small
-                    ><em>アカウントを開く ↗</em></span
-                  >
                 </a>
               </div>
               <p class="online-note" id="onlineNote">
@@ -397,9 +397,9 @@
       </div>
     </footer>
     <nav class="mobile-actions" aria-label="相談へのショートカット">
-      <a href="./#contact">相談方法を見る</a
-      ><a href="tel:0538443348"
-        ><span>電話で相談</span><strong>0538-44-3348</strong></a
+      <a href="#plans">料金を見る</a
+      ><a href="#contact"
+        ><span>オンラインで相談</span><strong>見積もり予約</strong></a
       >
     </nav>
   </body>
