@@ -617,6 +617,19 @@ main:focus {
 .security-license .button {
   margin-top: 28px;
 }
+.qualification-document {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #c9c0aa;
+}
+.qualification-document > p {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+.qualification-document .text-link {
+  margin-top: 4px;
+  color: var(--navy);
+}
 .license-preview {
   padding: 20px;
   border: 1px solid #c9c0aa;
