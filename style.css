@@ -1827,57 +1827,6 @@ html:not([data-enhanced]) body {
   text-shadow: none;
 }
 
-.hero-slider-controls {
-  position: absolute;
-  z-index: 3;
-  bottom: 30px;
-  left: 50%;
-  display: flex;
-  width: var(--container);
-  align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
-  pointer-events: none;
-  transform: translateX(-50%);
-}
-
-.hero-slider-controls button {
-  border: 1px solid rgba(255, 255, 255, 0.78);
-  color: #fff;
-  cursor: pointer;
-  pointer-events: auto;
-}
-
-.hero-slide-dot {
-  width: 12px;
-  height: 12px;
-  padding: 0;
-  border-radius: 50%;
-  background: transparent;
-}
-
-.hero-slide-dot.is-active {
-  background: #fff;
-}
-
-.hero-play-toggle {
-  display: grid;
-  width: 34px;
-  height: 34px;
-  margin-left: 4px;
-  padding: 0;
-  border-radius: 50%;
-  background: rgba(6, 20, 29, 0.48);
-  font-family: Arial, sans-serif;
-  font-size: 0.78rem;
-  line-height: 1;
-  place-items: center;
-}
-
-html:not([data-enhanced]) .hero-slider-controls {
-  display: none;
-}
-
 /* The selected second photograph fills the security section behind its copy. */
 .security {
   background-color: var(--navy);
@@ -2034,10 +1983,6 @@ html.spotlight-ready .spotlight-section.is-focus > .container {
     background-position: 62% center;
   }
 
-  .hero-slider-controls {
-    bottom: 18px;
-  }
-
   .security {
     background-position: center, center, 56% center;
   }
@@ -2068,10 +2013,6 @@ html.spotlight-ready .spotlight-section.is-focus > .container {
 @media (prefers-reduced-motion: reduce) {
   .hero-slide {
     transition: none;
-  }
-
-  .hero-play-toggle {
-    display: none;
   }
 
   .purpose-nav > a,

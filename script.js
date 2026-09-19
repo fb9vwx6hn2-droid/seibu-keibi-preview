@@ -85,22 +85,14 @@
   const hero = document.querySelector(".hero[data-slideshow]");
   if (hero) {
     const slides = Array.from(hero.querySelectorAll(".hero-slide"));
-    const dots = Array.from(hero.querySelectorAll(".hero-slide-dot"));
-    const playToggle = hero.querySelector(".hero-play-toggle");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let activeIndex = 0;
     let timer = 0;
-    let paused = reducedMotion.matches;
 
     const showSlide = (index) => {
       activeIndex = (index + slides.length) % slides.length;
       slides.forEach((slide, slideIndex) => {
         slide.classList.toggle("is-active", slideIndex === activeIndex);
-      });
-      dots.forEach((dot, dotIndex) => {
-        const active = dotIndex === activeIndex;
-        dot.classList.toggle("is-active", active);
-        dot.setAttribute("aria-pressed", String(active));
       });
     };
 
@@ -111,42 +103,13 @@
 
     const startTimer = () => {
       stopTimer();
-      if (paused || reducedMotion.matches || slides.length < 2) return;
+      if (reducedMotion.matches || slides.length < 2) return;
       timer = window.setInterval(() => showSlide(activeIndex + 1), 7000);
     };
 
-    const updatePlayToggle = () => {
-      if (!playToggle) return;
-      playToggle.setAttribute("aria-pressed", String(paused));
-      playToggle.setAttribute(
-        "aria-label",
-        paused ? "スライドショーを再生" : "スライドショーを一時停止",
-      );
-      const icon = playToggle.querySelector("span");
-      if (icon) icon.textContent = paused ? "▶" : "Ⅱ";
-    };
-
-    dots.forEach((dot, index) => {
-      dot.addEventListener("click", () => {
-        showSlide(index);
-        startTimer();
-      });
-    });
-
-    playToggle?.addEventListener("click", () => {
-      paused = !paused;
-      updatePlayToggle();
-      startTimer();
-    });
-
-    reducedMotion.addEventListener("change", (event) => {
-      paused = event.matches;
-      updatePlayToggle();
-      startTimer();
-    });
+    reducedMotion.addEventListener("change", startTimer);
 
     showSlide(0);
-    updatePlayToggle();
     startTimer();
   }
 
