@@ -1747,11 +1747,21 @@ html:not([data-enhanced]) body {
   flex-wrap: wrap;
 }
 
-/* Top visual: supplied Shizuoka landscape, with a strong readability veil. */
+/* Top visual: fixed copy over a restrained three-photo field-work slideshow. */
 .hero {
+  position: relative;
+  isolation: isolate;
   min-height: 650px;
   background-color: var(--navy-deep);
-  background-image:
+}
+
+.hero::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background:
     linear-gradient(
       90deg,
       rgba(6, 20, 29, 0.96) 0%,
@@ -1759,13 +1769,49 @@ html:not([data-enhanced]) body {
       rgba(6, 20, 29, 0.44) 76%,
       rgba(6, 20, 29, 0.28) 100%
     ),
-    linear-gradient(0deg, rgba(6, 20, 29, 0.36), rgba(6, 20, 29, 0.08)),
-    url("assets/hero-mountains.jpg");
-  background-position: center;
+    linear-gradient(0deg, rgba(6, 20, 29, 0.38), rgba(6, 20, 29, 0.08));
+}
+
+.hero-slides,
+.hero-slide {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-slides {
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-slide {
+  opacity: 0;
+  background-position: center 58%;
+  background-repeat: no-repeat;
   background-size: cover;
+  transition: opacity 1.35s ease;
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+}
+
+.hero-slide:nth-child(1) {
+  background-image: url("assets/hero-security-01.jpeg");
+}
+
+.hero-slide:nth-child(2) {
+  background-image: url("assets/hero-security-02.jpeg");
+  background-position: center 55%;
+}
+
+.hero-slide:nth-child(3) {
+  background-image: url("assets/hero-security-03.jpeg");
+  background-position: center 62%;
 }
 
 .hero-inner {
+  position: relative;
+  z-index: 2;
   display: flex;
   min-height: 650px;
   align-items: center;
@@ -1779,6 +1825,69 @@ html:not([data-enhanced]) body {
 
 .hero-copy .button {
   text-shadow: none;
+}
+
+.hero-slider-controls {
+  position: absolute;
+  z-index: 3;
+  bottom: 30px;
+  left: 50%;
+  display: flex;
+  width: var(--container);
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.hero-slider-controls button {
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  color: #fff;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.hero-slide-dot {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.hero-slide-dot.is-active {
+  background: #fff;
+}
+
+.hero-play-toggle {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  margin-left: 4px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(6, 20, 29, 0.48);
+  font-family: Arial, sans-serif;
+  font-size: 0.78rem;
+  line-height: 1;
+  place-items: center;
+}
+
+html:not([data-enhanced]) .hero-slider-controls {
+  display: none;
+}
+
+/* The selected second photograph fills the security section behind its copy. */
+.security {
+  background-color: var(--navy);
+  background-image:
+    linear-gradient(rgba(7, 23, 34, 0.86), rgba(7, 23, 34, 0.93)),
+    linear-gradient(90deg, rgba(7, 23, 34, 0.26), rgba(7, 23, 34, 0.08)),
+    url("assets/security-work.jpeg");
+  background-position: center, center, center 57%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /* Three clear routes, separated by service category rather than one long bar. */
@@ -1876,7 +1985,6 @@ html.spotlight-ready .spotlight-section.is-focus > .container {
 @media (max-width: 800px) {
   .hero {
     min-height: 590px;
-    background-position: 52% center;
   }
 
   .hero-inner {
@@ -1907,16 +2015,31 @@ html.spotlight-ready .spotlight-section.is-focus > .container {
 @media (max-width: 600px) {
   .hero {
     min-height: 560px;
-    background-image:
+  }
+
+  .hero::after {
+    background:
       linear-gradient(
         90deg,
         rgba(6, 20, 29, 0.91) 0%,
         rgba(6, 20, 29, 0.73) 68%,
         rgba(6, 20, 29, 0.58) 100%
       ),
-      linear-gradient(0deg, rgba(6, 20, 29, 0.45), rgba(6, 20, 29, 0.08)),
-      url("assets/hero-mountains.jpg");
-    background-position: 48% center;
+      linear-gradient(0deg, rgba(6, 20, 29, 0.48), rgba(6, 20, 29, 0.08));
+  }
+
+  .hero-slide,
+  .hero-slide:nth-child(2),
+  .hero-slide:nth-child(3) {
+    background-position: 62% center;
+  }
+
+  .hero-slider-controls {
+    bottom: 18px;
+  }
+
+  .security {
+    background-position: center, center, 56% center;
   }
 
   .hero-inner {
@@ -1943,6 +2066,14 @@ html.spotlight-ready .spotlight-section.is-focus > .container {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-slide {
+    transition: none;
+  }
+
+  .hero-play-toggle {
+    display: none;
+  }
+
   .purpose-nav > a,
   .spotlight-section > .container {
     transition: none;

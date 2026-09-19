@@ -36,12 +36,12 @@
     <link
       rel="preload"
       as="image"
-      href="assets/hero-mountains.jpg"
+      href="assets/hero-security-01.jpeg"
       fetchpriority="high"
     />
-    <link rel="stylesheet" href="style.css?v=20260918e" />
+    <link rel="stylesheet" href="style.css?v=20260919a" />
     <script src="contact-links.js?v=20260918" defer></script>
-    <script src="script.js?v=20260915" defer></script>
+    <script src="script.js?v=20260919a" defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -114,7 +114,17 @@
       </div>
     </header>
     <main id="main" tabindex="-1">
-      <section class="hero" id="top" aria-labelledby="heroTitle">
+      <section
+        class="hero"
+        id="top"
+        aria-labelledby="heroTitle"
+        data-slideshow
+      >
+        <div class="hero-slides" aria-hidden="true">
+          <div class="hero-slide is-active"></div>
+          <div class="hero-slide"></div>
+          <div class="hero-slide"></div>
+        </div>
         <div class="container hero-inner">
           <div class="hero-copy">
             <p class="eyebrow">袋井市・静岡県西部の交通誘導警備</p>
@@ -125,6 +135,34 @@
               道路工事・建設現場の交通誘導を中心に。<br />確かな判断と誠実な対応で、地域の安全を支えます。
             </p>
           </div>
+        </div>
+        <div class="hero-slider-controls" aria-label="メイン写真の切り替え">
+          <button
+            class="hero-slide-dot is-active"
+            type="button"
+            aria-label="1枚目の写真を表示"
+            aria-pressed="true"
+          ></button>
+          <button
+            class="hero-slide-dot"
+            type="button"
+            aria-label="2枚目の写真を表示"
+            aria-pressed="false"
+          ></button>
+          <button
+            class="hero-slide-dot"
+            type="button"
+            aria-label="3枚目の写真を表示"
+            aria-pressed="false"
+          ></button>
+          <button
+            class="hero-play-toggle"
+            type="button"
+            aria-label="スライドショーを一時停止"
+            aria-pressed="false"
+          >
+            <span aria-hidden="true">Ⅱ</span>
+          </button>
         </div>
       </section>
       <nav class="purpose-nav container" aria-label="目的から探す">
